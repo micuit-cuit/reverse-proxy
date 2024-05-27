@@ -20,7 +20,9 @@ Here is the structure of the project:
         styles.css
     README.md
 ```
-## Main Files
+
+
+## Main Files
     - index.js: This is the main server file. It handles incoming requests and manages the proxy configuration.
     - log.js: This file contains the logging functionality for the server.
     - proxy-web/: This directory contains the web interface for the proxy server.
