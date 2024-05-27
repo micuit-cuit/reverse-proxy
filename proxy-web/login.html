@@ -68,7 +68,7 @@
             }
                 
             e.preventDefault();
-            fetch('/proxies/api/login/'+token.value)
+            fetch('/proxy/api/login/'+token.value)
                 .then(response => response.json())
                 .then(data => {
                     if (data.status == 'error') {
@@ -95,7 +95,7 @@
                         localStorage.setItem('token', token.value);
                         //redirect to the content page
                         setTimeout(() => {
-                            window.location.href = '/proxies/index.html';
+                            window.location.href = '/proxy/index.html';
                         }, 200);
                     }
                 });

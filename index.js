@@ -83,7 +83,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/api/proxies/:action', (req, res, next) => {
+app.get('/api/proxy/:action', (req, res, next) => {
     //verifie si l'api est accessible par cette ip
     if(config.accessApi == 'ip' && req.ip != config.apiIp){
         return next();
@@ -175,7 +175,7 @@ app.get('/api/proxies/:action', (req, res, next) => {
     }
             
 });
-app.get('/proxies/api/login/:token', (req, res, next) => {
+app.get('/proxy/api/login/:token', (req, res, next) => {
     tentativeIpWebServer[req.ip] = tentativeIpWebServer[req.ip]?tentativeIpWebServer[req.ip]+1:1;
     if(tentativeIpWebServer[req.ip] > config.maxTentativePerIp){
         return next();
@@ -193,7 +193,7 @@ app.get('/proxies/api/login/:token', (req, res, next) => {
         res.send({ "status": "error" });
     }
 })
-app.get('/proxies/login', (req, res, next) => {
+app.get('/proxy/login', (req, res, next) => {
     if(config.accessApi == 'ip' && req.ip != config.apiIp){
         return next();
     }else if(config.accessApi == 'localhost' && !(req.ip.startsWith('::ffff') || !(req.ip.startsWith('::1')|| req.ip.startsWith('127.') || req.ip.startsWith('192.168.') || req.ip.startsWith('10.')))){
@@ -201,7 +201,7 @@ app.get('/proxies/login', (req, res, next) => {
     }
     res.sendFile(__dirname + '/proxy-web/login.html');
 });
-app.get('/proxies/:resource', (req, res, next) => {
+app.get('/proxy/:resource', (req, res, next) => {
     console.log(req.ip,autorisedIpWebServer.indexOf(req.ip));
     if(autorisedIpWebServer.indexOf(req.ip) == -1){
         return next();

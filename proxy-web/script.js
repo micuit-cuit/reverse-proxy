@@ -4,7 +4,7 @@ let proxiesList = [];
 function reloadList() {
     let content = document.getElementById('content');
     content.innerHTML = '<h1 id="add" onclick="addProxy()">AJOUTER</h1>';
-    fetch('/api/proxies/list', {
+    fetch('/api/proxy/list', {
         method: "GET",
         headers: {
             "x-token": token
@@ -62,7 +62,7 @@ function reloadList() {
                 applyButton.id = 'apply';
                 applyButton.innerText = '✅';
                 applyButton.onclick = function(){
-                    fetch('/api/proxies/reload', {
+                    fetch('/api/proxy/reload', {
                         method: "GET",
                         headers: {
                             "x-token": token
@@ -88,7 +88,7 @@ function addProxy() {
     if (!hostname || !target) {
         return;
     }
-    fetch('/api/proxies/add?hostname=' + hostname + '&target=' + target+'&status=inactive&reload=true', {
+    fetch('/api/proxy/add?hostname=' + hostname + '&target=' + target+'&status=inactive&reload=true', {
         method: "GET",
         headers: {
             "x-token": token
@@ -103,7 +103,7 @@ function addProxy() {
         })
 }
 function deleteProxy(id) {
-    fetch('/api/proxies/remove?index=' + id+'&reload=false', {
+    fetch('/api/proxy/remove?index=' + id+'&reload=false', {
         method: "GET",
         headers: {
             "x-token": token
@@ -119,7 +119,7 @@ function deleteProxy(id) {
         })
 }
 function toggleProxy(id) {
-    fetch('/api/proxies/'+(proxiesList[id].status === 'active' ? 'deactivate' : 'activate')+'?index=' + id+'&reload=false', {
+    fetch('/api/proxy/'+(proxiesList[id].status === 'active' ? 'deactivate' : 'activate')+'?index=' + id+'&reload=false', {
         method: "GET",
         headers: {
             "x-token": token
